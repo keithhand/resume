@@ -31,6 +31,10 @@
 
 \setlist{nosep}
 
+\newcommand\formatdate[1]{
+  {\small #1}
+}
+
 % -- \part
 \titleformat{\part}
   {\bfseries\Large}
@@ -40,13 +44,39 @@
 \titlespacing{\part}{0em}{*3}{*2}
 
 % -- \section
-\setsectionspace{0}
-\titleformat{\section}[runin]
-  {\bfseries}
+\newcommand\setsectionspace[1]{\def\sectionspace{#1}}
+\newcommand\setsectionstyle[1]{
+  \if 1#1 % skills
+    \setsectionspace{0}
+    \titleformat{\section}[runin]
+      {\bfseries}
+      {}
+      {0em}
+      {}[:]
+    \titlespacing{\section}{.5em}{*0}{*0}
+  \else
+  \if 2#1 % experience/education
+    \setsectionspace{2}
+    \titleformat{\section}[runin]
+      {\bfseries\large}
+      {}
+      {0em}
+      {}[\hfill {\vrule width 0pt}]
+    \titlespacing{\section}{.5em}{*1.5}{*0}
+  \fi
+  \fi
+}
+\newcommand\setsection[1]{
+  \setsectionstyle{#1}
+}
+
+% -- \subsection
+\titleformat{\subsection}[runin]
+  {\normalsize}
   {}
   {0em}
-  {}[:]
-\titlespacing{\section}{.5em}{*0}{*0}
+  {}
+\titlespacing{\subsection}{1em}{*-.5}{*0}
 
 % - formatting -
 
@@ -64,6 +94,22 @@
   \begin{enumerate*}[label=, before=\small, itemjoin={,}, style=sameline]
     #2
   \end{enumerate*}
+}
+
+% [End date]{Start date}{Title}{Company}{Location}{Description}
+\newcommand{\setstaticbullets}[1]{
+  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
+}
+\newcommand{\experience}[6][Present]{
+  \setsection{2}
+
+  \setstaticbullets{}
+  \section{#3}
+    \formatdate{#2 -- #1}
+  \subsection{{\normalsize#4} - {\footnotesize\itshape#5}}
+  \begin{description}[style=standard, before=\footnotesize, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
+    #6
+  \end{description}
 }
 
 % - header -
