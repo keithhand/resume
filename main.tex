@@ -112,6 +112,20 @@
   \end{description}
 }
 
+% [Minor Degree]{Major Degree}{Graduation date}{University}
+\newcommand{\education}[4][]{
+  \setsection{2}
+
+  \section{
+    #2
+    \ifx#1\else{\mdseries\footnotesize\itshape - Minor in #1}\fi
+  }
+    \formatdate{#3}
+  \subsection{
+    #4
+  }
+}
+
 % - header -
 
 \newcommand{\position}[1]{
