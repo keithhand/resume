@@ -2,12 +2,87 @@
 
 \usepackage[margin=1cm, left=1.3cm, right=1.3cm]{geometry}
 \usepackage{titling}
+\usepackage[inline]{enumitem}
+\usepackage{phonenumbers}
+\usepackage{hyperref}
+
+% - debug commands -
+
+\newcommand\fakedata{
+  \title{Fake dataa}
+  \author{John Doe}
+  \position{
+    \item Software Developer
+  }
+  \email{fake@email.com}
+  \phone{3135556789}
+  \github{fake}
+  \linkedin{fake}
+}
 
 % - ats stuff -
 
 \input{glyphtounicode}
 \pdfgentounicode=1
 \pagenumbering{gobble}
+
+% - styling -
+
+\setlist{nosep}
+
+% - header -
+
+\newcommand{\position}[1]{
+  \def\theauthorposition{#1}
+}
+
+\newcommand{\phone}[1]{
+  \def\theauthorphone{\phonenumber[country=US,foreign]{#1}}
+}
+
+\newcommand{\email}[1]{
+  \def\theauthoremail{#1}
+}
+
+\newcommand{\github}[1]{
+  \def\theauthorgithub{\href{https://www.github.com/#1}{github.com/#1}}
+}
+
+\newcommand{\linkedin}[1]{
+  \def\theauthorlinkedin{\href{https://www.linkedin.com/#1}{linkedin.com/#1}}
+}
+
+\renewcommand{\maketitle}{
+  \begin{center}
+    {\LARGE\bfseries
+    \theauthor}
+
+    \vspace{.5em}
+
+    \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
+      \theauthorposition
+    \end{description*}
+    
+    \vspace{.5em}
+
+    \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
+      \ifdefined \theauthorphone
+        \item \theauthorphone
+      \fi
+      \ifdefined \theauthoremail
+        \item \theauthoremail
+      \fi
+      \ifdefined \theauthorgithub
+        \item \theauthorgithub
+      \fi
+      \ifdefined \theauthorlinkedin
+        \item \theauthorlinkedin
+      \fi
+    \end{description*}
+  \end{center}
+
+  \vspace{-2em}
+}
 
 % ---
 
@@ -22,6 +97,9 @@
 \phone{}
 \github{}
 \linkedin{}
+
+%-- debug command to add fake data
+\fakedata
 
 \maketitle
 
