@@ -30,6 +30,14 @@
 
 \setlist{nosep}
 
+% -- \part
+\titleformat{\part}
+  {\bfseries\Large}
+  {}
+  {-.5em}
+  {}[ \titlerule ]
+\titlespacing{\part}{0em}{*3}{*2}
+
 % - header -
 
 \newcommand{\position}[1]{
@@ -102,5 +110,21 @@
 \fakedata
 
 \maketitle
+
+% - SUMMARY -
+
+\part{Brief Summary}
+
+% - SKILLS -
+
+\part{Technical Skills}
+
+% - EXPERIENCE -
+
+\part{Experience}
+
+% - EDUCATION -
+
+\part{Education}
 
 \end{document}
