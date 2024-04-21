@@ -6,6 +6,11 @@
 \usepackage[inline]{enumitem}
 \usepackage{phonenumbers}
 \usepackage{hyperref}
+\hypersetup{
+  pdftitle={Resume},
+  pdfpagemode=FullScreen,
+  pdfborder={0 0 0},
+}
 
 % - debug commands -
 
@@ -137,7 +142,7 @@
 }
 
 \newcommand{\email}[1]{
-  \def\theauthoremail{#1}
+  \def\theauthoremail{\href{mailto:#1}{#1}}
 }
 
 \newcommand{\github}[1]{
