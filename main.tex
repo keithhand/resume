@@ -10,7 +10,7 @@
 % - debug commands -
 
 \newcommand\fakedata{
-  \title{Fake dataa}
+  \title{Fake data}
   \author{John Doe}
   \position{
     \item Software Developer
@@ -41,7 +41,7 @@
   {}
   {-.5em}
   {}[ \titlerule ]
-\titlespacing{\part}{0em}{*3}{*2}
+\titlespacing{\part}{0em}{*2}{*1.5}
 
 % -- \section
 \newcommand\setsectionspace[1]{\def\sectionspace{#1}}
@@ -83,7 +83,7 @@
 % {Summary}
 \newcommand{\summary}[1][]{
   \paragraph{}
-  {#1}
+  \hspace{-1.5em}{#1}
 }
 
 % {Category}{Skill}
