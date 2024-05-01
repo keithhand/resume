@@ -6,6 +6,8 @@
 \usepackage[inline]{enumitem}
 \usepackage{phonenumbers}
 \usepackage{hyperref}
+\usepackage{subfiles}
+
 \hypersetup{
   pdftitle={Resume},
   pdfpagemode=FullScreen,
@@ -26,16 +28,17 @@
   \linkedin{fake}
 }
 
+
 % - ats stuff -
 
-\input{glyphtounicode}
-\pdfgentounicode=1
+%\input{glyphtounicode}
+%\pdfgentounicode=1
 \pagenumbering{gobble}
 
 % - styling -
 
+% -- global
 \setlist{nosep}
-
 \newcommand\formatdate[1]{
   {\small #1}
 }
@@ -86,7 +89,7 @@
 % - formatting -
 
 % {Summary}
-\newcommand{\summary}[1][]{
+\newcommand{\summary}[1]{
   \paragraph{}
   \hspace{-1.5em}{#1}
 }
@@ -102,12 +105,8 @@
 }
 
 % [End date]{Start date}{Title}{Company}{Location}{Description}
-\newcommand{\setstaticbullets}[1]{
-  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
-}
 \newcommand{\experience}[6][Present]{
   \setsection{2}
-
   \setstaticbullets{}
   \section{#3}
     \formatdate{#2 -- #1}
@@ -116,11 +115,13 @@
     #6
   \end{description}
 }
+\newcommand{\setstaticbullets}[1]{
+  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
+}
 
 % [Minor Degree]{Major Degree}{Graduation date}{University}
 \newcommand{\education}[4][]{
   \setsection{2}
-
   \section{
     #2
     \ifx#1\else{\mdseries\footnotesize\itshape - Minor in #1}\fi
@@ -150,7 +151,7 @@
 }
 
 \newcommand{\linkedin}[1]{
-  \def\theauthorlinkedin{\href{https://www.linkedin.com/#1}{linkedin.com/#1}}
+  \def\theauthorlinkedin{\href{https://www.linkedin.com/in/#1}{linkedin.com/#1}}
 }
 
 \renewcommand{\maketitle}{
@@ -190,65 +191,18 @@
 \begin{document}
 
 \title{Resume}
-\author{}
-\position{
-  \item
-}
-\email{}
-\phone{}
-\github{}
-\linkedin{}
-
-%-- debug command to add fake data
-\fakedata
-
-\maketitle
-
-% - SUMMARY -
+\subfile{info/primary}
 
 \part{Brief Summary}
-
-% --------
-% \summary
-% {Text}
-% --------
-
-% - SKILLS -
+\subfile{info/summary}
 
 \part{Technical Skills}
-
-% ------
-% \skill
-% {Category}
-% {
-%   \item List of skills
-% }
-% ------
-
-% - EXPERIENCE -
+\subfile{info/skills}
 
 \part{Experience}
-
-% -----------
-% \experience
-% [End date]{Start date}
-% {Title}
-% {Company}{Location}
-% {
-%   \item Support customers with application issues and Kubernetes/cloud troubleshooting.
-% }
-% -----------
-
-% - EDUCATION -
+\subfile{info/experience}
 
 \part{Education}
-
-% ----------
-% \education
-% [Minor Degree]
-% {Major Degree}
-% {Graduation Date}
-% {School}
-% ----------
+\subfile{info/education}
 
 \end{document}
