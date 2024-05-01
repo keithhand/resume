@@ -1,5 +1,8 @@
 .DS_Store
 
+# PDF outputs
+*.pdf
+
 # LaTeX
 *.aux
 *.fdb_latexmk
