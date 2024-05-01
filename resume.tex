@@ -1,0 +1,208 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[margin=1cm, left=1.3cm, right=1.3cm]{geometry}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\usepackage{phonenumbers}
+\usepackage{hyperref}
+\usepackage{subfiles}
+
+\hypersetup{
+  pdftitle={Resume},
+  pdfpagemode=FullScreen,
+  pdfborder={0 0 0},
+}
+
+% - debug commands -
+
+\newcommand\fakedata{
+  \title{Fake data}
+  \author{John Doe}
+  \position{
+    \item Software Developer
+  }
+  \email{fake@email.com}
+  \phone{3135556789}
+  \github{fake}
+  \linkedin{fake}
+}
+
+
+% - ats stuff -
+
+%\input{glyphtounicode}
+%\pdfgentounicode=1
+\pagenumbering{gobble}
+
+% - styling -
+
+% -- global
+\setlist{nosep}
+\newcommand\formatdate[1]{
+  {\small #1}
+}
+
+% -- \part
+\titleformat{\part}
+  {\bfseries\Large}
+  {}
+  {-.5em}
+  {}[ \titlerule ]
+\titlespacing{\part}{0em}{*2}{*1.5}
+
+% -- \section
+\newcommand\setsectionspace[1]{\def\sectionspace{#1}}
+\newcommand\setsectionstyle[1]{
+  \if 1#1 % skills
+    \setsectionspace{0}
+    \titleformat{\section}[runin]
+      {\bfseries}
+      {}
+      {0em}
+      {}[:]
+    \titlespacing{\section}{.5em}{*0}{*0}
+  \else
+  \if 2#1 % experience/education
+    \setsectionspace{2}
+    \titleformat{\section}[runin]
+      {\bfseries\large}
+      {}
+      {0em}
+      {}[\hfill {\vrule width 0pt}]
+    \titlespacing{\section}{.5em}{*1.5}{*0}
+  \fi
+  \fi
+}
+\newcommand\setsection[1]{
+  \setsectionstyle{#1}
+}
+
+% -- \subsection
+\titleformat{\subsection}[runin]
+  {\normalsize}
+  {}
+  {0em}
+  {}
+\titlespacing{\subsection}{1em}{*-.5}{*0}
+
+% - formatting -
+
+% {Summary}
+\newcommand{\summary}[1]{
+  \paragraph{}
+  \hspace{-1.5em}{#1}
+}
+
+% {Category}{Skill}
+\newcommand{\skill}[2]{
+  \setsection{1}
+  \section{#1}
+  % #2
+  \begin{enumerate*}[label=, before=\small, itemjoin={,}, style=sameline]
+    #2
+  \end{enumerate*}
+}
+
+% [End date]{Start date}{Title}{Company}{Location}{Description}
+\newcommand{\experience}[6][Present]{
+  \setsection{2}
+  \setstaticbullets{}
+  \section{#3}
+    \formatdate{#2 -- #1}
+  \subsection{{\normalsize#4} - {\footnotesize\itshape#5}}
+  \begin{description}[style=standard, before=\footnotesize, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
+    #6
+  \end{description}
+}
+\newcommand{\setstaticbullets}[1]{
+  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
+}
+
+% [Minor Degree]{Major Degree}{Graduation date}{University}
+\newcommand{\education}[4][]{
+  \setsection{2}
+  \section{
+    #2
+    \ifx#1\else{\mdseries\footnotesize\itshape - Minor in #1}\fi
+  }
+    \formatdate{#3}
+  \subsection{
+    #4
+  }
+}
+
+% - header -
+
+\newcommand{\position}[1]{
+  \def\theauthorposition{#1}
+}
+
+\newcommand{\phone}[1]{
+  \def\theauthorphone{\phonenumber[country=US,foreign]{#1}}
+}
+
+\newcommand{\email}[1]{
+  \def\theauthoremail{\href{mailto:#1}{#1}}
+}
+
+\newcommand{\github}[1]{
+  \def\theauthorgithub{\href{https://www.github.com/#1}{github.com/#1}}
+}
+
+\newcommand{\linkedin}[1]{
+  \def\theauthorlinkedin{\href{https://www.linkedin.com/in/#1}{linkedin.com/#1}}
+}
+
+\renewcommand{\maketitle}{
+  \begin{center}
+    {\LARGE\bfseries
+    \theauthor}
+
+    \vspace{.5em}
+
+    \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
+      \theauthorposition
+    \end{description*}
+    
+    \vspace{.5em}
+
+    \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
+      \ifdefined \theauthorphone
+        \item \theauthorphone
+      \fi
+      \ifdefined \theauthoremail
+        \item \theauthoremail
+      \fi
+      \ifdefined \theauthorgithub
+        \item \theauthorgithub
+      \fi
+      \ifdefined \theauthorlinkedin
+        \item \theauthorlinkedin
+      \fi
+    \end{description*}
+  \end{center}
+
+  \vspace{-2em}
+}
+
+% ---
+
+\begin{document}
+
+\title{Resume}
+\subfile{info/primary}
+
+\part{Brief Summary}
+\subfile{info/summary}
+
+\part{Technical Skills}
+\subfile{info/skills}
+
+\part{Experience}
+\subfile{info/experience}
+
+\part{Education}
+\subfile{info/education}
+
+\end{document}
