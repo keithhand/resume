@@ -1,8 +1,27 @@
-name: resume
+name: resumaker
 services:
-  build:
-    build: .
-    environment:
-      TEXINPUTS: ".:./private//:./info//:"
-    command:
-      - build
+  build-main:
+    profiles: ["build"]
+    build: &build
+      context: .
+    environment: &env
+      TEXINPUTS: ".:./private//:./info//:./out//:$TEXINPUTS"
+      HOST_USER: "${UID}"
+      HOST_GROUP: "${GID}"
+    volumes:
+      - ./out:/app/out
+    command: ["main.pdf"]
+
+  run-main: &default-run
+    profiles: ["dev"]
+    build: *build
+    environment: *env
+    volumes:
+      - .:/app
+    command: ["main.tex"]
+  run-resume:
+    <<: *default-run
+    command: ["resume.tex"]
+  run-cover:
+    <<: *default-run
+    command: ["cover.tex"]

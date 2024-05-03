@@ -1,8 +1,3 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -38,6 +33,6 @@ ENV DEBIAN_FRONTEND=dialog \
     LC_ALL=C.UTF-8
 
 
-WORKDIR /tmp
+WORKDIR /app
 COPY . .
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./bin/entrypoint.sh"]
