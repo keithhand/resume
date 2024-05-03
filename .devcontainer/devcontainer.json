@@ -1,9 +1,4 @@
 {
   "name": "latex-env",
-  "customizations": {
-    "vscode": {
-        "extensions": ["james-yu.latex-workshop"]
-    }
-  },
-  "dockerFile": "Dockerfile"
+  "dockerComposeFile": "../docker-compose.yml"
 }

@@ -18,15 +18,16 @@ RUN apt-get update && apt-get -y upgrade \
     texlive-latex-base \
     texlive-extra-utils \
     texlive-latex-extra \
-    biber chktex latexmk make python3-pygments python3-pkg-resources
+    biber latexmk make
+    # biber chktex latexmk make python3-pygments python3-pkg-resources
 
 # latexindent modules
-RUN apt-get install --no-install-recommends -y curl
-RUN curl -L http://cpanmin.us | perl - App::cpanminus \
-    && cpanm Log::Dispatch::File \
-    && cpanm YAML::Tiny \
-    && cpanm File::HomeDir \
-    && cpanm Unicode::GCString
+# RUN apt-get install --no-install-recommends -y curl
+# RUN curl -L http://cpanmin.us | perl - App::cpanminus \
+#     && cpanm Log::Dispatch::File \
+#     && cpanm YAML::Tiny \
+#     && cpanm File::HomeDir \
+#     && cpanm Unicode::GCString
 
 # Clean up
 RUN apt-get autoremove -y \
@@ -35,3 +36,8 @@ RUN apt-get autoremove -y \
 ENV DEBIAN_FRONTEND=dialog \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
+
+
+WORKDIR /tmp
+COPY . .
+ENTRYPOINT ["./entrypoint.sh"]
