@@ -5,23 +5,37 @@ services:
     build: &build
       context: .
     environment: &env
-      TEXINPUTS: ".:./private//:./info//:./out//:$TEXINPUTS"
+      FILENAME: "main.pdf"
+      TEXINPUTS: ".:./private//:./info//:./out//:"
       HOST_USER: "${UID}"
       HOST_GROUP: "${GID}"
     volumes:
       - ./out:/app/out
-    command: ["main.pdf"]
 
-  run-main: &default-run
+  run-resume: &default-run
     profiles: ["dev"]
     build: *build
-    environment: *env
+    environment:
+      <<: *env
+      FILENAME: "resume.tex"
+    healthcheck:
+      test: ["CMD-SHELL", "ls out/$${FILENAME%%.*}.pdf"]
+      interval: 3s
+      retries: 3
     volumes:
       - .:/app
-    command: ["main.tex"]
-  run-resume:
-    <<: *default-run
-    command: ["resume.tex"]
   run-cover:
     <<: *default-run
-    command: ["cover.tex"]
+    environment:
+      <<: *env
+      FILENAME: "cover.tex"
+  run-main:
+    <<: *default-run
+    environment:
+      <<: *env
+      FILENAME: "main.tex"
+    depends_on:
+      run-cover:
+        condition: service_healthy
+      run-resume:
+        condition: service_healthy

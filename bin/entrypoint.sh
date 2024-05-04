@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-filename="$1"
+filename="$FILENAME"
 extension="${filename##*.}"
 outputfile="-jobname=./out/${filename%%.*}"
 
 clean_up() {
 	latexmk -c "$outputfile" "$filename"
-	./bin/fix-permissions.sh
+	bin/fix-permissions.sh
 }
 trap clean_up SIGTERM
 
