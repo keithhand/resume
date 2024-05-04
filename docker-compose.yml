@@ -1,39 +1,56 @@
 name: resumaker
 services:
-  build-main:
-    profiles: ["build"]
-    build: &build
+  ci-resume: &ci
+    profiles: ["ci"]
+    build:
       context: .
+      dockerfile: docker/Dockerfile
     environment: &env
-      FILENAME: "main.pdf"
-      TEXINPUTS: ".:./private//:./info//:./out//:"
+      FILE: "resume.pdf"
+      TEXINPUTS: ".:./private//:./info//:/out//:"
       HOST_USER: "${UID}"
       HOST_GROUP: "${GID}"
     volumes:
-      - ./out:/app/out
-
-  run-resume: &default-run
-    profiles: ["dev"]
-    build: *build
+      - ./out:/out
+      - ./latex:/app
+  ci-cover:
+    <<: *ci
     environment:
       <<: *env
-      FILENAME: "resume.tex"
+      FILE: "cover.pdf"
+  ci-main:
+    <<: *ci
+    environment:
+      <<: *env
+      FILE: "main.pdf"
+    depends_on:
+      ci-cover:
+        condition: service_completed_successfully
+      ci-resume:
+        condition: service_completed_successfully
+
+
+  run-resume: &run
+    <<: *ci
+    profiles: ["dev"]
+    environment:
+      <<: *env
+      FILE: "resume.tex"
     healthcheck:
-      test: ["CMD-SHELL", "ls out/$${FILENAME%%.*}.pdf"]
+      test: ["CMD-SHELL", "ls /out/$${FILE%%.*}.pdf"]
+      start_period: 3s
       interval: 3s
       retries: 3
-    volumes:
-      - .:/app
   run-cover:
-    <<: *default-run
+    <<: *run
     environment:
       <<: *env
-      FILENAME: "cover.tex"
+      FILE: "cover.tex"
   run-main:
-    <<: *default-run
+    <<: *run
     environment:
       <<: *env
-      FILENAME: "main.tex"
+      FILE: "main.tex"
     depends_on:
       run-cover:
         condition: service_healthy

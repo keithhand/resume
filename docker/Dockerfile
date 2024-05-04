@@ -13,5 +13,8 @@ RUN apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY . .
-ENTRYPOINT ["./bin/entrypoint.sh"]
+
+COPY docker/bin /usr/local/bin
+COPY latex .
+
+ENTRYPOINT ["entrypoint.sh"]
