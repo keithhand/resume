@@ -1,0 +1,3 @@
+[submodule "latex/private"]
+	path = latex/private
+	url = git@github.com:keithhand/resume-info

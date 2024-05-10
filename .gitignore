@@ -1,8 +1,5 @@
 .DS_Store
 
-# Personal info symlink
-private
-
 # PDF outputs
 *.pdf
 
