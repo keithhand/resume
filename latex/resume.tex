@@ -138,7 +138,7 @@
 }
 
 \newcommand{\linkedin}[1]{
-  \def\theauthorlinkedin{\href{https://www.linkedin.com/in/#1}{linkedin.com/#1}}
+  \def\theauthorlinkedin{\href{https://www.linkedin.com/in/#1}{linkedin.com/in/#1}}
 }
 
 \renewcommand{\maketitle}{
@@ -146,13 +146,13 @@
     {\LARGE\bfseries
     \theauthor}
 
-    \vspace{.5em}
+    \vspace{.25em}
 
     \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
       \theauthorposition
     \end{description*}
     
-    \vspace{.5em}
+    \vspace{.25em}
 
     \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
       \ifdefined \theauthorphone
@@ -170,7 +170,7 @@
     \end{description*}
   \end{center}
 
-  \vspace{-2em}
+  \vspace{-1.5em}
 }
 
 % ---
@@ -195,8 +195,6 @@
 \part{Education}
 \subfile{education}
 
-\vfill
-\vfill
 \vfill
 \hspace{0em}
 
