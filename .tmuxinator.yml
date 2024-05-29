@@ -10,8 +10,5 @@ on_project_exit:
   - docker-compose down
 
 windows:
-  - editor:
-      layout: main-horizontal
-      panes:
-      - vim
-      - docker-compose up --force-recreate
+  - editor: vim && exit
+  - docker: docker-compose up --force-recreate || exit
