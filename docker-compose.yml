@@ -7,7 +7,7 @@ services:
       dockerfile: docker/Dockerfile
     environment: &env
       FILE: "resume.pdf"
-      TEXINPUTS: ".:./private//:./info//:/out//:"
+      TEXINPUTS: ".:./sections/:./private//:./info//:/out//:"
       HOST_USER: "${UID}"
       HOST_GROUP: "${GID}"
     volumes:

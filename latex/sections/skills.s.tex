@@ -1,0 +1,24 @@
+\input{skills}
+
+% {Category}{Skill}
+\newcommand{\skill}[2]{
+  \setsection{1}
+  \section{#1}
+  \begin{enumerate*}[label=, before=\small, itemjoin={,}, style=sameline]
+    #2
+  \end{enumerate*}
+}
+
+\documentclass[../resume.tex]{subfiles}
+
+\begin{document}
+\begin{luacode}
+  for skill in pairs(SKILLS) do
+    tex.sprint("\\skill{" .. skill .. "}{")
+    for _, item in ipairs(SKILLS[skill]) do
+      tex.sprint("\\item " .. item)
+    end
+    tex.sprint("}")
+  end
+\end{luacode}
+\end{document}

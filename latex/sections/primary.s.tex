@@ -1,0 +1,72 @@
+\newcommand{\primaryname}{
+  \thisprimaryname
+}
+
+\newcommand{\primaryemail}{
+  \thisprimaryemail
+}
+
+\newcommand{\primaryphone}{
+  \thisprimaryphone
+}
+
+\newcommand{\primarygithub}{
+  \href{https://www.\thisprimarygithub}{\thisprimarygithub}
+}
+
+\newcommand{\primarylinkedin}{
+  \href{https://www.\thisprimarylinkedin}{\thisprimarylinkedin}
+}
+
+\newcommand{\primarypositions}{
+  \thisprimarypositions
+}
+
+\input{primary}
+
+\renewcommand{\maketitle}{
+  \begin{center}
+    {\LARGE\bfseries
+    \theauthor}
+
+    \vspace{.25em}
+
+    \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
+      \theauthorposition
+    \end{description*}
+
+    \vspace{.25em}
+
+    \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
+      \ifdefined \theauthorphone
+        \item \theauthorphone
+      \fi
+      \ifdefined \theauthoremail
+        \item \theauthoremail
+      \fi
+      \ifdefined \theauthorgithub
+        \item \theauthorgithub
+      \fi
+      \ifdefined \theauthorlinkedin
+        \item \theauthorlinkedin
+      \fi
+    \end{description*}
+  \end{center}
+
+  \vspace{-1.5em}
+}
+
+\documentclass[../resume.tex]{subfiles}
+
+\begin{document}
+
+\author{\primaryname}
+\def\theauthorposition{\primarypositions}
+\def\theauthoremail{\href{mailto:\primaryemail}{\primaryemail}}
+\def\theauthorphone{\phonenumber[country=US,foreign]{\primaryphone}}
+\def\theauthorgithub{\primarygithub}
+\def\theauthorlinkedin{\primarylinkedin}
+
+\maketitle
+
+\end{document}

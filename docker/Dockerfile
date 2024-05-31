@@ -6,6 +6,10 @@ RUN apt-get update && apt-get -y upgrade \
 
 RUN apt-get update && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends \
+    texlive-luatex
+
+RUN apt-get update && apt-get -y upgrade \
+    && apt-get -y install --no-install-recommends \
     latexmk
 
 RUN apt-get autoremove -y \

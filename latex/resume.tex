@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{subfiles}
 \usepackage{lipsum}
+\usepackage{luacode}
 
 \hypersetup{
   pdftitle={Resume},
@@ -72,107 +73,6 @@
   {}
 \titlespacing{\subsection}{1em}{*-.5}{*0}
 
-% - formatting -
-
-% {Summary}
-\newcommand{\summary}[1]{
-  \paragraph{}
-  \hspace{-1.5em}{#1}
-}
-
-% {Category}{Skill}
-\newcommand{\skill}[2]{
-  \setsection{1}
-  \section{#1}
-  % #2
-  \begin{enumerate*}[label=, before=\small, itemjoin={,}, style=sameline]
-    #2
-  \end{enumerate*}
-}
-
-% [End date]{Start date}{Title}{Company}{Location}{Description}
-\newcommand{\experience}[6][Present]{
-  \setsection{2}
-  \setstaticbullets{}
-  \section{#3}
-    \formatdate{#2 -- #1}
-  \subsection{{\normalsize#4} - {\footnotesize\itshape#5}}
-  \begin{description}[style=standard, before=\footnotesize, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
-    #6
-  \end{description}
-}
-\newcommand{\setstaticbullets}[1]{
-  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
-}
-
-% [Minor Degree]{Major Degree}{Graduation date}{University}
-\newcommand{\education}[4][]{
-  \setsection{2}
-  \section{
-    #2
-    \ifx#1\else{\mdseries\footnotesize\itshape - Minor in #1}\fi
-  }
-    \formatdate{#3}
-  \subsection{
-    #4
-  }
-  \hspace{0em}
-}
-
-% - header -
-
-\newcommand{\position}[1]{
-  \def\theauthorposition{#1}
-}
-
-\newcommand{\phone}[1]{
-  \def\theauthorphone{\phonenumber[country=US,foreign]{#1}}
-}
-
-\newcommand{\email}[1]{
-  \def\theauthoremail{\href{mailto:#1}{#1}}
-}
-
-\newcommand{\github}[1]{
-  \def\theauthorgithub{\href{https://www.github.com/#1}{github.com/#1}}
-}
-
-\newcommand{\linkedin}[1]{
-  \def\theauthorlinkedin{\href{https://www.linkedin.com/in/#1}{linkedin.com/in/#1}}
-}
-
-\renewcommand{\maketitle}{
-  \begin{center}
-    {\LARGE\bfseries
-    \theauthor}
-
-    \vspace{.25em}
-
-    \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
-      \theauthorposition
-    \end{description*}
-    
-    \vspace{.25em}
-
-    \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
-      \ifdefined \theauthorphone
-        \item \theauthorphone
-      \fi
-      \ifdefined \theauthoremail
-        \item \theauthoremail
-      \fi
-      \ifdefined \theauthorgithub
-        \item \theauthorgithub
-      \fi
-      \ifdefined \theauthorlinkedin
-        \item \theauthorlinkedin
-      \fi
-    \end{description*}
-  \end{center}
-
-  \vspace{-1.5em}
-}
-
 % ---
 
 \begin{document}
@@ -181,19 +81,19 @@
 \vfill
 
 \title{Resume}
-\subfile{primary}
+\subfile{primary.s}
 
 \part{Brief Summary}
-\subfile{summary}
+\subfile{summary.s}
 
 \part{Technical Skills}
-\subfile{skills}
+\subfile{skills.s}
 
 \part{Experience}
-\subfile{experience}
+\subfile{experience.s}
 
 \part{Education}
-\subfile{education}
+\subfile{education.s}
 
 \vfill
 \hspace{0em}

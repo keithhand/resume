@@ -1,8 +1,60 @@
 \documentclass[10pt,a4paper]{letter}
-
 \usepackage[margin=1in]{geometry}
-\usepackage{subfiles}
+
+\newcommand{\covername}{
+  \thiscovername
+}
+
+\newcommand{\targetposition}{
+  \thistargetposition
+}
+
+\newcommand{\targetcompany}{
+  \thistargetcompany
+}
+
+\newcommand{\coveropening}{
+  \thiscoveropening\hspace{-3pt},
+}
+
+\newcommand{\coverclosing}{
+  \thiscoverclosing\hspace{-3pt},
+}
+
+\newcommand{\intro}{
+  \thisintro
+}
+
+\newcommand{\body}{
+  \thisbody
+}
+
+\newcommand{\outro}{
+  \thisoutro
+}
+
+\input{cover-info}
+
+\newcommand{\separator}{
+
+  \vspace{-.5em}
+  \ldots
+
+}
 
 \begin{document}
-\subfile{cover-info}
+\begin{letter}{\targetcompany\\Re: \targetposition Opening}
+  \pagestyle{plain}
+  \signature{\vspace{-4em}\covername}
+  \opening{\coveropening}
+
+  \intro
+  \separator
+  \body
+  \separator
+  \outro
+
+  \vspace{2em}
+  \closing{\coverclosing}
+\end{letter}
 \end{document}

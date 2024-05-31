@@ -1,0 +1,36 @@
+\input{experience}
+
+% [End date]{Start date}{Title}{Company}{Location}{Description}
+\newcommand{\experience}[6][Present]{
+  \setsection{2}
+  \setstaticbullets{}
+  \section{#3}
+    \formatdate{#2 -- #1}
+  \subsection{{\normalsize#4} - {\footnotesize\itshape#5}}
+  \begin{description}[style=standard, before=\footnotesize, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
+    #6
+  \end{description}
+}
+\newcommand{\setstaticbullets}[1]{
+  \renewcommand\descriptionlabel[1]{$\bullet$ {#1}}
+}
+
+\documentclass[../resume.tex]{subfiles}
+
+\begin{document}
+\begin{luacode}
+  for experience in pairs(EXPERIENCES) do
+    local e = EXPERIENCES[experience]
+    tex.sprint("\\experience")
+    tex.sprint("{" .. e.start_date .. "}")
+    tex.sprint("{" .. e.title .. "}")
+    tex.sprint("{" .. e.company .. "}")
+    tex.sprint("{" .. e.location .. "}")
+    tex.sprint("{")
+    for i in pairs(e.descriptions) do
+      tex.sprint("\\item " .. e.descriptions[i])
+    end
+    tex.sprint("}")
+  end
+\end{luacode}
+\end{document}

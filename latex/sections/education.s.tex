@@ -1,0 +1,32 @@
+\newcommand{\school}{
+  \thisschool
+}
+
+\newcommand{\majordegree}{
+  \thismajordegree
+}
+
+\newcommand{\graduationdate}{
+  \thisgraduationdate
+}
+
+\newcommand{\minordegree}{
+  - Minor in\thisminordegree
+}
+
+\input{education}
+
+\documentclass[../resume.tex]{subfiles}
+
+\begin{document}
+\setsection{2}
+\section{
+  \majordegree
+  \hspace{-.3em}\mdseries\footnotesize\itshape\minordegree
+}
+  \formatdate{\graduationdate}
+\subsection{
+  \school
+}
+\hspace{0em}
+\end{document}
