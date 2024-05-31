@@ -6,7 +6,7 @@ RUN apt-get update && apt-get -y upgrade \
 
 RUN apt-get update && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends \
-    latexmk make
+    latexmk
 
 RUN apt-get autoremove -y \
     && apt-get clean -y \
