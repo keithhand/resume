@@ -22,6 +22,7 @@
   for experience in pairs(EXPERIENCES) do
     local e = EXPERIENCES[experience]
     tex.sprint("\\experience")
+    tex.sprint("[" .. e.end_date .. "]")
     tex.sprint("{" .. e.start_date .. "}")
     tex.sprint("{" .. e.title .. "}")
     tex.sprint("{" .. e.company .. "}")
