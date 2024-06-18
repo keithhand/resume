@@ -36,7 +36,7 @@
   {}
   {-.5em}
   {}[ \titlerule ]
-\titlespacing{\part}{0em}{*2}{*1.5}
+\titlespacing{\part}{0em}{*4}{*2}
 
 % -- \section
 \newcommand\setsectionspace[1]{\def\sectionspace{#1}}
@@ -48,7 +48,7 @@
       {}
       {0em}
       {}[:]
-    \titlespacing{\section}{.5em}{*0}{*0}
+    \titlespacing{\section}{.5em}{*.3}{*1}
   \else
   \if 2#1 % experience/education
     \setsectionspace{2}
@@ -76,9 +76,6 @@
 % ---
 
 \begin{document}
-
-\hspace{0em}
-\vfill
 
 \title{Resume}
 \subfile{primary.s}
