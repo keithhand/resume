@@ -13,7 +13,12 @@
 
 \begin{document}
 \begin{luacode}
+  local orderedKeys = {}
   for skill in pairs(SKILLS) do
+    table.insert(orderedKeys, skill)
+  end
+  table.sort(orderedKeys)
+  for _, skill in pairs(orderedKeys) do
     tex.sprint("\\skill{" .. skill .. "}{")
     for _, item in ipairs(SKILLS[skill]) do
       tex.sprint("\\item " .. item)
