@@ -1,4 +1,8 @@
-\input{experience}
+\directlua{
+  if not pcall(require, "private.experience") then
+    require("info.experience")
+  end
+}
 
 % [End date]{Start date}{Title}{Company}{Location}{Description}
 \newcommand{\experience}[6][Present]{

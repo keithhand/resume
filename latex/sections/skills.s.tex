@@ -1,4 +1,8 @@
-\input{skills}
+\directlua{
+  if not pcall(require, "private.skills") then
+    require("info.skills")
+  end
+}
 
 % {Category}{Skill}
 \newcommand{\skill}[2]{
