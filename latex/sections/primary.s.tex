@@ -26,18 +26,18 @@
 
 \renewcommand{\maketitle}{
   \hspace{0em}
-  \vspace{.5em}
+  \vspace{1em}
   \begin{center}
     {\LARGE\bfseries
     \theauthor}
 
-    \vspace{.25em}
+    \vspace{.5em}
 
     \begin{description*}[before=\large\itshape,itemjoin={{ ---}}, mode=unboxed]
       \theauthorposition
     \end{description*}
 
-    \vspace{.25em}
+    \vspace{.5em}
 
     \begin{description*}[before=\small,itemjoin={{ \vrule }}, mode=unboxed]
       \ifdefined \theauthorphone
@@ -54,7 +54,7 @@
       \fi
     \end{description*}
   \end{center}
-  \vspace{.5em}
+  \vspace{1em}
 }
 
 \documentclass[../resume.tex]{subfiles}
