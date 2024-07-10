@@ -1,9 +1,3 @@
-\directlua{
-  if not pcall(require, "private.skills") then
-    require("info.skills")
-  end
-}
-
 % {Category}{Skill}
 \newcommand{\skill}[2]{
   \setsection{1}
@@ -17,15 +11,31 @@
 
 \begin{document}
 \begin{luacode}
-  local orderedKeys = {}
-  for skill in pairs(SKILLS) do
-    table.insert(orderedKeys, skill)
+  if not pcall(require, "private.skills") then
+    require("info.skills")
   end
-  table.sort(orderedKeys)
-  for _, skill in pairs(orderedKeys) do
-    tex.sprint("\\skill{" .. skill .. "}{")
-    for _, item in ipairs(SKILLS[skill]) do
-      tex.sprint("\\item " .. item)
+
+  local function sortSkills(skills)
+    local oSkills = {}
+    for skill, quals in pairs(skills) do
+      table.insert(oSkills, {
+        name = skill,
+        quals = quals,
+      })
+    end
+    table.sort(oSkills, function(a, b)
+      local function length(skill)
+        return #skill.name + #table.concat(skill.quals, ", ")
+      end
+      return length(a) < length(b)
+    end)
+    return oSkills
+  end
+
+  for _, skill in pairs(sortSkills(SkillsInput)) do
+    tex.sprint("\\skill{" .. skill.name .. "}{")
+    for _, qual in ipairs(skill.quals) do
+      tex.sprint("\\item " .. qual)
     end
     tex.sprint("}")
   end

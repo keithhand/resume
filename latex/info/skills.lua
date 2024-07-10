@@ -1,4 +1,4 @@
-SKILLS = {
+SkillsInput = {
 	["Technical Skills"] = {
 		"Python",
 		"Java",
