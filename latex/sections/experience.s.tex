@@ -1,3 +1,4 @@
+
 \directlua{
   if not pcall(require, "private.experience") then
     require("info.experience")
@@ -10,8 +11,8 @@
   \setstaticbullets{}
   \section{#3}
     \formatdate{#2 -- #1}
-  \subsection{{\normalsize#4} - {\footnotesize\itshape#5}}
-  \begin{description}[style=standard, before=\footnotesize, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
+  \subsection{{\normalsize#4} - {\small\itshape#5}}
+  \begin{description}[style=standard, before=\fontsize{10}{10}\selectfont, itemsep={.5ex}, leftmargin={2em}, itemindent={-.7em}, labelsep={0em}, rightmargin=\leftmargin]
     #6
   \end{description}
 }

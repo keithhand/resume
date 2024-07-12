@@ -2,7 +2,7 @@
 
 filename="${FILE%%.*}"
 extension="${FILE##*.}"
-latex_build="latexmk -outdir=/out -auxdir=/tmp -pdflua"
+latex_build="latexmk -outdir=/out -auxdir=/tmp -lualatex"
 
 clean_up() {
 	bin/fix-permissions.sh
