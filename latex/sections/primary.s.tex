@@ -3,19 +3,19 @@
 }
 
 \newcommand{\primaryemail}{
-  \thisprimaryemail
+  \href{mailto:\thisprimaryemail}{\thisprimaryemail}
 }
 
 \newcommand{\primaryphone}{
-  \thisprimaryphone
+  \phonenumber[country=US,foreign]{\thisprimaryphone}
 }
 
 \newcommand{\primarygithub}{
-  \href{https://www.\thisprimarygithub}{\thisprimarygithub}
+  \href{https://www.github.com/\thisprimarygithub}{github.com/\thisprimarygithub}
 }
 
 \newcommand{\primarylinkedin}{
-  \href{https://www.\thisprimarylinkedin}{\thisprimarylinkedin}
+  \href{https://www.linkedin.com/in/\thisprimarylinkedin}{linkedin.com/in/\thisprimarylinkedin}
 }
 
 \newcommand{\primarypositions}{
@@ -63,8 +63,8 @@
 
 \author{\primaryname}
 \def\theauthorposition{\primarypositions}
-\def\theauthoremail{\href{mailto:\primaryemail}{\primaryemail}}
-\def\theauthorphone{\phonenumber[country=US,foreign]{\primaryphone}}
+\def\theauthoremail{\primaryemail}
+\def\theauthorphone{\primaryphone}
 \def\theauthorgithub{\primarygithub}
 \def\theauthorlinkedin{\primarylinkedin}
 
