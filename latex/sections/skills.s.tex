@@ -25,7 +25,8 @@
     end
     table.sort(oSkills, function(a, b)
       local function length(skill)
-        return #skill.name + #table.concat(skill.quals, ", ")
+        -- HACK: weight the header characters stronger because they are bolded
+        return (#skill.name * 1.2) + #table.concat(skill.quals, ", ")
       end
       return length(a) < length(b)
     end)
