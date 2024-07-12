@@ -1,15 +1,13 @@
 name: resume
-
 pre_window: "export COMPOSE_PROFILES=dev"
 on_project_start:
   - export COMPOSE_PROFILES=dev
   - open --background --hide out/main.pdf
 on_project_exit:
-  - docker-compose down
-
+  - docker compose down
 windows:
   - editor:
       layout: main-horizontal
       panes:
-        - vim && exit
-        - docker-compose up --force-recreate || tmux_exit
+        - vim
+        - docker compose up --force-recreate
