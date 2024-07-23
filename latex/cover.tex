@@ -48,11 +48,23 @@
   \signature{\vspace{-4em}\covername}
   \opening{\coveropening}
 
-  \intro
-  \separator
-  \body
-  \separator
-  \outro
+  \directlua{
+    local intro = "\intro"
+    local body = "\body"
+    local outro = "\outro"
+    local defaultLen = 3
+
+    if string.len(intro) >= defaultLen then
+      tex.print(intro, "\\separator")
+    end
+    if string.len(body) >= defaultLen then
+      tex.print(body)
+      if string.len(outro) >= defaultLen then
+        tex.print("\\separator")
+      end
+    end
+    tex.print(outro)
+  }
 
   \vspace{2em}
   \closing{\coverclosing}
