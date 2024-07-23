@@ -34,11 +34,13 @@
   end
 
   for _, skill in pairs(sortSkills(SkillsInput)) do
-    tex.sprint("\\skill{" .. skill.name .. "}{")
-    for _, qual in ipairs(skill.quals) do
-      tex.sprint("\\item " .. qual)
+    if #skill.quals ~= 0 then
+      tex.sprint("\\skill{" .. skill.name .. "}{")
+      for _, qual in ipairs(skill.quals) do
+        tex.sprint("\\item " .. qual)
+      end
+      tex.sprint("}")
     end
-    tex.sprint("}")
   end
 \end{luacode}
 \end{document}
